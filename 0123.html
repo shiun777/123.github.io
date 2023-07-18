@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Camera Monitoring</title>
+</head>
+<body>
+    <video id="videoElement" autoplay></video>
+
+    <script>
+        // 获取video元素
+        var video = document.getElementById('videoElement');
+
+        // 检查浏览器是否支持WebRTC
+        if (navigator.mediaDevices.getUserMedia) {
+            // 请求访问相机
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    // 将相机的媒体流绑定到video元素
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.log("访问相机失败: " + error);
+                });
+        } else {
+            console.log("浏览器不支持WebRTC");
+        }
+    </script>
+</body>
+</html>
